@@ -35,4 +35,30 @@ class PisosController extends Controller
                 ]),
         ]);
     }
+
+    public function create()
+    {
+        return Inertia::render('Pisos/Create');
+    }
+
+    public function store()
+    {
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function destroy()
+    {
+
+    }
+
+    public function restore()
+    {
+
+    }
 }
+
