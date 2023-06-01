@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Piso;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,10 +17,13 @@ class DatabaseSeeder extends Seeder
     {
 
         User::factory()->create([
-            'first_name' => 'Maria Carmen',
-            'last_name' => 'Gaitán Forteza',
+            'name' => 'Carmen Gaitán',
             'email' => 'inverpromo7@gmail.com',
+            'direccion' => 'Carrer Amer 22 A bajos',
+            'telefono' => '672 728 777',
             'password' => '7557',
         ]);
+
+        Piso::factory(5)->create();
     }
 }

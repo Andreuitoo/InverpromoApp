@@ -86,8 +86,6 @@ export default {
     return {
       form: {
         search: this.filters.search,
-        role: this.filters.role,
-        trashed: this.filters.trashed,
       },
     }
   },

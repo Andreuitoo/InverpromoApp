@@ -14,16 +14,17 @@ class Pisos extends Migration
     public function up()
     {
         Schema::create('pisos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->date('fecha');
-            $table->string('tipo_piso');
-            $table->string('zona');
-            $table->integer('precio');
-            $table->integer('num_hab');
-            $table->string('muebles');
-            $table->string('descripcion');
-            $table->integer('telefono');
-            $table->string('propietario');
+            $table->id();
+            $table->string('nombre')->nullable();
+            $table->date('fecha')->nullable();
+            $table->string('tipo_piso')->nullable();
+            $table->string('zona')->nullable();
+            $table->integer('precio')->nullable();
+            $table->integer('num_hab')->nullable();
+            $table->string('muebles')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->integer('telefono')->nullable();
+            $table->string('propietario')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

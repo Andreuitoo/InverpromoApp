@@ -1,0 +1,134 @@
+<template>
+  <div>
+    <Head title="Pisos" />
+    <h1 class="mb-8 text-3xl font-bold">Pisos</h1>
+    <div class="flex items-center justify-between mb-6">
+      <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset" />
+      <Link class="btn-indigo" href="/pisos/create">
+        <span>Añadir</span>
+        <span class="hidden md:inline">&nbsp;piso</span>
+      </Link>
+    </div>
+    <div class="bg-white rounded-md shadow overflow-x-auto">
+      <table class="w-full whitespace-nowrap">
+        <tr class="text-left font-bold">
+          <th class="pb-4 pt-6 px-6">Nombre</th>
+          <th class="pb-4 pt-6 px-6">Fecha</th>
+          <th class="pb-4 pt-6 px-6">Tipo de piso</th>
+          <th class="pb-4 pt-6 px-6">Zona</th>
+          <th class="pb-4 pt-6 px-6">Precio</th>
+          <th class="pb-4 pt-6 px-6">Nº Habitaciones</th>
+          <th class="pb-4 pt-6 px-6">Muebles</th>
+          <th class="pb-4 pt-6 px-6">Telefono</th>
+          <th class="pb-4 pt-6 px-6">Propietario</th>
+          <th class="pb-4 pt-6 px-6">Descripción</th>
+        </tr>
+        <tr v-for="piso in pisos" :key="piso.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/pisos/${piso.id}/edit`">
+              {{ piso.nombre }}
+              <icon v-if="piso.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+              {{ piso.fecha }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+              {{ piso.tipo_piso }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+              {{ piso.zona }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+              {{ piso.precio }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+              {{ piso.num_hab }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+              {{ piso.muebles }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+              {{ piso.telefono }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+              {{ piso.propietario }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+              {{ piso.descripcion }}
+            </Link>
+          </td>
+          <td class="w-px border-t">
+            <Link class="flex items-center px-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
+            </Link>
+          </td>
+        </tr>
+        <tr v-if="pisos.length === 0">
+          <td class="px-6 py-4 border-t" colspan="4">No pisos found.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</template>
+
+<script>
+import { Head, Link } from '@inertiajs/inertia-vue3'
+import Icon from '@/Shared/Icon'
+import pickBy from 'lodash/pickBy'
+import Layout from '@/Shared/Layout'
+import throttle from 'lodash/throttle'
+import mapValues from 'lodash/mapValues'
+import SearchFilter from '@/Shared/SearchFilter'
+
+export default {
+  components: {
+    Head,
+    Icon,
+    Link,
+    SearchFilter,
+  },
+  layout: Layout,
+  props: {
+    filters: Object,
+    pisos: Array,
+  },
+  data() {
+    return {
+      form: {
+        search: this.filters.search,
+      },
+    }
+  },
+  watch: {
+    form: {
+      deep: true,
+      handler: throttle(function () {
+        this.$inertia.get('/pisos', pickBy(this.form), { preserveState: true })
+      }, 150),
+    },
+  },
+  methods: {
+    reset() {
+      this.form = mapValues(this.form, () => null)
+    },
+  },
+}
+</script>

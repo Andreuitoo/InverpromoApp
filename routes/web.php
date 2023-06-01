@@ -1,12 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
-use App\Http\Controllers\OrganizationsController;
-use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\PisosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +67,12 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
     ->name('users.restore')
     ->middleware('auth');
 
+
+// Pisos
+
+Route::get('pisos', [PisosController::class, 'index'])
+    ->name('Pisos')
+    ->middleware('auth');
 
 // Images
 
