@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Piso;
+use App\Models\Account;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $account = Account::create(['name' => 'Inverpromo']);
+
         User::factory()->create([
+            'account_id' => $account->id,
             'name' => 'Carmen Gaitán',
             'email' => 'inverpromo7@gmail.com',
             'direccion' => 'Carrer Amer 22 A bajos',
@@ -24,6 +28,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
+            'account_id' => $account->id,
             'name' => 'Andreu Salleras',
             'email' => 'andreusadurnisg@gmail.com',
             'direccion' => 'Carrer Amer 22 A bajos',

@@ -49,6 +49,15 @@ class UsersController extends Controller
             'photo' => ['nullable', 'image'],
         ]);
 
+        Auth::user()->account->users()->create([
+            'name' => Request::get('name'),
+            'email' => Request::get('email'),
+            'direccion' => Request::get('direccion'),
+            'telefono' => Request::get('telefono'),
+            'password' => Request::get('password'),
+            'photo_path' => Request::file('photo') ? Request::file('photo')->store('users') : null,
+        ]);
+
         return Redirect::route('users')->with('success', 'Usuario creado.');
     }
 
@@ -61,8 +70,8 @@ class UsersController extends Controller
                 'email' => $user->email,
                 'direccion' => $user->direccion,
                 'telefono' => $user->telefono,
-                'deleted_at' => $user->deleted_at,
                 'photo' => $user->photo_path ? URL::route('image', ['path' => $user->photo_path, 'w' => 60, 'h' => 60, 'fit' => 'crop']) : null,
+                'deleted_at' => $user->deleted_at,
             ],
         ]);
     }
@@ -77,6 +86,8 @@ class UsersController extends Controller
             'password' => ['nullable'],
             'photo' => ['nullable', 'image'],
         ]);
+
+        $user->update(Request::only('name', 'email', 'direccion', 'telefono'));
 
         if (Request::file('photo')) {
             $user->update(['photo_path' => Request::file('photo')->store('users')]);
