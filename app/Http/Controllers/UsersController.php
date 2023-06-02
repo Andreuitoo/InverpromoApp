@@ -27,6 +27,7 @@ class UsersController extends Controller
                     'email' => $user->email,
                     'direccion' => $user->direccion,
                     'telefono' => $user->telefono,
+                    'photo' => $user->photo_path ? URL::route('image', ['path' => $user->photo_path, 'w' => 40, 'h' => 40, 'fit' => 'crop']) : null,
                     'deleted_at' => $user->deleted_at,
                 ]),
         ]);
@@ -45,6 +46,7 @@ class UsersController extends Controller
             'direccion' => ['required', 'max:50'],
             'telefono' => ['required', 'max:50'],
             'password' => ['nullable'],
+            'photo' => ['nullable', 'image'],
         ]);
 
         return Redirect::route('users')->with('success', 'Usuario creado.');
@@ -60,6 +62,7 @@ class UsersController extends Controller
                 'direccion' => $user->direccion,
                 'telefono' => $user->telefono,
                 'deleted_at' => $user->deleted_at,
+                'photo' => $user->photo_path ? URL::route('image', ['path' => $user->photo_path, 'w' => 60, 'h' => 60, 'fit' => 'crop']) : null,
             ],
         ]);
     }
@@ -72,7 +75,16 @@ class UsersController extends Controller
             'telefono' => ['required', 'max:50'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => ['nullable'],
+            'photo' => ['nullable', 'image'],
         ]);
+
+        if (Request::file('photo')) {
+            $user->update(['photo_path' => Request::file('photo')->store('users')]);
+        }
+
+        if (Request::get('password')) {
+            $user->update(['password' => Request::get('password')]);
+        }
 
         return Redirect::back()->with('success', 'Usuario actualizado.');
     }

@@ -74,6 +74,31 @@ Route::get('pisos', [PisosController::class, 'index'])
     ->name('Pisos')
     ->middleware('auth');
 
+Route::get('pisos/create', [PisosController::class, 'create'])
+    ->name('Pisos.create')
+    ->middleware('auth');
+
+Route::post('pisos', [PisosController::class, 'store'])
+    ->name('Pisos.store')
+    ->middleware('auth');
+
+Route::get('pisos/{piso}/edit', [PisosController::class, 'edit'])
+    ->name('Pisos.edit')
+    ->middleware('auth');
+
+Route::put('pisos/{piso}', [PisosController::class, 'update'])
+    ->name('Pisos.update')
+    ->middleware('auth');
+
+Route::delete('pisos/{piso}', [PisosController::class, 'destroy'])
+    ->name('Pisos.destroy')
+    ->middleware('auth');
+
+Route::put('pisos/{piso}/restore', [PisosController::class, 'restore'])
+    ->name('Pisos.restore')
+    ->middleware('auth');
+
+
 // Images
 
 Route::get('/img/{path}', [ImagesController::class, 'show'])
