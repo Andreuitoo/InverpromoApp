@@ -13,7 +13,7 @@ class Piso extends Model
 
     protected $fillable = [
         'fecha',
-        'nombre',
+        'ref',
         'tipo_piso',
         'zona',
         'precio',
@@ -28,7 +28,11 @@ class Piso extends Model
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
-                $query->where('nombre', 'like', '%'.$search.'%');
+                $query->where('ref', 'like', '%'.$search.'%')
+                    ->orWhere('tipo_piso', 'like', '%'.$search.'%')
+                    ->orWhere('fecha', 'like', '%'.$search.'%')
+                    ->orWhere('precio', 'like', '%'.$search.'%')
+                    ->orWhere('zona', 'like', '%'.$search.'%');
             });
         });
     }

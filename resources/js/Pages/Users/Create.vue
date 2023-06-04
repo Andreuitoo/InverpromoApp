@@ -2,8 +2,8 @@
   <div>
     <Head title="Crear usuario" />
     <h1 class="mb-8 text-3xl font-bold">
-      <Link class="text-green-400 hover:text-green-600" href="/users">Usuarios</Link>
-      <span class="text-green-400 font-medium">/</span> Crear un nuevo usuario
+      <Link class="text-green-700 hover:text-green-500" href="/users">Usuarios</Link>
+      <span class="text-green-700 font-medium">/</span> Crear un nuevo usuario
     </h1>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="store">

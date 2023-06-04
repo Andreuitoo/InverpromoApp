@@ -35,7 +35,5 @@ class DatabaseSeeder extends Seeder
             'telefono' => '645 43 28 17',
             'password' => '7557',
         ]);
-
-        Piso::factory(10)->create();
     }
 }

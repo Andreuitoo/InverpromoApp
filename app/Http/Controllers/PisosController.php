@@ -16,13 +16,13 @@ class PisosController extends Controller
         return Inertia::render('Pisos/Index', [
             'filters' => Request::all('search'),
             'pisos' => Piso::query()
-                ->orderBy('nombre')
+                ->orderBy('ref', 'desc')
                 ->filter(Request::only('search'))
                 ->paginate(10)
                 ->withQueryString()
                 ->through(fn ($piso) => [
                     'id' => $piso->id,
-                    'nombre' => $piso->nombre,
+                    'ref' => $piso->ref,
                     'fecha' => $piso->fecha,
                     'tipo_piso' => $piso->tipo_piso,
                     'zona' => $piso->zona,
@@ -45,7 +45,7 @@ class PisosController extends Controller
     {
         Piso::create(
             Request::validate([
-                'nombre' => ['required', 'max:50'],
+                'ref' => ['required', 'max:50'],
                 'fecha' => ['required', 'max:50'],
                 'tipo_piso' => ['required', 'max:50'],
                 'zona' => ['required', 'max:50'],
@@ -65,7 +65,7 @@ class PisosController extends Controller
         return Inertia::render('Pisos/Edit', [
             'piso' => [
                 'id' => $piso->id,
-                'nombre' => $piso->nombre,
+                'ref' => $piso->ref,
                 'fecha' => $piso->fecha,
                 'tipo_piso' => $piso->tipo_piso,
                 'zona' => $piso->zona,
@@ -83,7 +83,7 @@ class PisosController extends Controller
     {
         $piso->update(
             Request::validate([
-                'nombre' => ['required', 'max:50'],
+                'ref' => ['required', 'max:50'],
                 'fecha' => ['required', 'max:50'],
                 'tipo_piso' => ['required', 'max:50'],
                 'zona' => ['required', 'max:50'],

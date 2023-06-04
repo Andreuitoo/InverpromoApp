@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Pisos extends Migration
+class Clientes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,19 @@ class Pisos extends Migration
      */
     public function up()
     {
-        Schema::create('pisos', function (Blueprint $table) {
+        Schema::create('clientes', function (Blueprint $table) {
             $table->id();
-            $table->string('ref')->nullable();
+            $table->string('nombre')->nullable();
             $table->date('fecha')->nullable();
-            $table->string('tipo_piso')->nullable();
-            $table->string('zona')->nullable();
-            $table->integer('precio')->nullable();
-            $table->integer('num_hab')->nullable();
-            $table->string('muebles')->nullable();
-            $table->string('descripcion')->nullable();
             $table->integer('telefono')->nullable();
-            $table->string('propietario')->nullable();
+            $table->integer('telefono_2')->nullable();
+            $table->string('zona')->nullable();
+            $table->string('zona_2')->nullable();
+            $table->integer('num_hab')->nullable();
+            $table->integer('num_hab_2')->nullable();
+            $table->integer('precio')->nullable();
+            $table->integer('precio_2')->nullable();
+            $table->string('descripcion')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -37,6 +38,6 @@ class Pisos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pisos');
+        Schema::dropIfExists('clientes');
     }
 }

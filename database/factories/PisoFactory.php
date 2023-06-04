@@ -15,7 +15,7 @@ class PisoFactory extends Factory
     {
         return [
             'fecha' => $this->faker->date(),
-            'nombre' => $this->faker->word(),
+            'ref' => $this->faker->word(),
             'tipo_piso' => $this->faker->word(),
             'zona' => $this->faker->word(),
             'precio' => $this->faker->randomNumber(),
