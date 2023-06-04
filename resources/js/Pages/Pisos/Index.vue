@@ -23,55 +23,55 @@
           <th class="pb-4 pt-6 px-6">Propietario</th>
           <th class="pb-4 pt-6 px-6">Descripción</th>
         </tr>
-        <tr v-for="piso in pisos" :key="piso.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr v-for="piso in pisos.data" :key="piso.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/pisos/${piso.id}/edit`">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/edit`">
               {{ piso.nombre }}
               <icon v-if="piso.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
               {{ piso.fecha }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
               {{ piso.tipo_piso }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
               {{ piso.zona }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
               {{ piso.precio }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
               {{ piso.num_hab }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
               {{ piso.muebles }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
               {{ piso.telefono }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
               {{ piso.propietario }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
               {{ piso.descripcion }}
             </Link>
           </td>
@@ -81,11 +81,12 @@
             </Link>
           </td>
         </tr>
-        <tr v-if="pisos.length === 0">
-          <td class="px-6 py-4 border-t" colspan="4">No pisos found.</td>
+        <tr v-if="pisos.data.length === 0">
+          <td class="px-6 py-4 border-t" colspan="10">No se han encontrado pisos</td>
         </tr>
       </table>
     </div>
+    <pagination class="mt-6" :links="pisos.links" />
   </div>
 </template>
 
@@ -97,6 +98,7 @@ import Layout from '@/Shared/Layout'
 import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import SearchFilter from '@/Shared/SearchFilter'
+import Pagination from '@/Shared/Pagination'
 
 export default {
   components: {
@@ -104,11 +106,12 @@ export default {
     Icon,
     Link,
     SearchFilter,
+    Pagination,
   },
   layout: Layout,
   props: {
     filters: Object,
-    pisos: Array,
+    pisos: Object,
   },
   data() {
     return {

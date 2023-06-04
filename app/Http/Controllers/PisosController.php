@@ -18,8 +18,9 @@ class PisosController extends Controller
             'pisos' => Piso::query()
                 ->orderBy('nombre')
                 ->filter(Request::only('search'))
-                ->get()
-                ->transform(fn ($piso) => [
+                ->paginate(10)
+                ->withQueryString()
+                ->through(fn ($piso) => [
                     'id' => $piso->id,
                     'nombre' => $piso->nombre,
                     'fecha' => $piso->fecha,
@@ -31,7 +32,6 @@ class PisosController extends Controller
                     'descripcion' => $piso->descripcion,
                     'telefono' => $piso->telefono,
                     'propietario' => $piso->propietario,
-                    'deleted_at' => $piso->deleted_at,
                 ]),
         ]);
     }
@@ -43,21 +43,21 @@ class PisosController extends Controller
 
     public function store()
     {
-
-        Request::validate([
-            'nombre' => ['required', 'max:50'],
-            'fecha' => ['required', 'max:50'],
-            'tipo_piso' => ['required', 'max:50'],
-            'zona' => ['required', 'max:50'],
-            'precio' => ['required', 'max:50'],
-            'num_hab' => ['required', 'max:50'],
-            'muebles' => ['required', 'max:50'],
-            'descripcion' => ['required', 'max:50'],
-            'telefono' => ['required', 'max:50'],
-            'propietario' => ['required', 'max:50'],
-        ]);
-
-        return Redirect::route('pisos')->with('success', 'Piso creado correctamente.');
+        Piso::create(
+            Request::validate([
+                'nombre' => ['required', 'max:50'],
+                'fecha' => ['required', 'max:50'],
+                'tipo_piso' => ['required', 'max:50'],
+                'zona' => ['required', 'max:50'],
+                'precio' => ['required', 'max:50'],
+                'num_hab' => ['required', 'max:50'],
+                'muebles' => ['required', 'max:50'],
+                'descripcion' => ['required', 'max:150'],
+                'telefono' => ['required', 'max:50'],
+                'propietario' => ['required', 'max:50'],
+            ])
+        );
+        return Redirect::route('Pisos')->with('success', 'Piso añadido correctamente.');
     }
 
     public function edit(Piso $piso)
@@ -75,14 +75,13 @@ class PisosController extends Controller
                 'descripcion' => $piso->descripcion,
                 'telefono' => $piso->telefono,
                 'propietario' => $piso->propietario,
-                'deleted_at' => $piso->deleted_at,
             ],
         ]);
     }
 
     public function update(Piso $piso)
     {
-        $pisos->update(
+        $piso->update(
             Request::validate([
                 'nombre' => ['required', 'max:50'],
                 'fecha' => ['required', 'max:50'],

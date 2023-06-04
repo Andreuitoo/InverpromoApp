@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Carmen Gaitán',
             'email' => 'inverpromo7@gmail.com',
             'direccion' => 'Carrer Amer 22 A bajos',
-            'telefono' => '672 728 777',
+            'telefono' => '672 72 87 77',
             'password' => '7557',
         ]);
 
@@ -36,6 +36,6 @@ class DatabaseSeeder extends Seeder
             'password' => '7557',
         ]);
 
-        Piso::factory(5)->create();
+        Piso::factory(10)->create();
     }
 }

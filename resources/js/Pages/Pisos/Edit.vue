@@ -1,31 +1,31 @@
 <template>
   <div>
-    <Head :title="`${form.first_name} ${form.last_name}`" />
+    <Head :title="`${form.nombre}`" />
     <div class="flex justify-start mb-8 max-w-3xl">
       <h1 class="text-3xl font-bold">
-        <Link class="text-indigo-400 hover:text-indigo-600" href="/users">Users</Link>
-        <span class="text-indigo-400 font-medium">/</span>
-        {{ form.first_name }} {{ form.last_name }}
+        <Link class="text-green-700 hover:text-green-500" href="/pisos">Pisos</Link>
+        <span class="text-green-700 font-medium">/</span>
+        {{ form.nombre }}
       </h1>
-      <img v-if="user.photo" class="block ml-4 w-8 h-8 rounded-full" :src="user.photo" />
     </div>
-    <trashed-message v-if="user.deleted_at" class="mb-6" @restore="restore"> This user has been deleted. </trashed-message>
+    <trashed-message v-if="piso.deleted_at" class="mb-6" @restore="restore"> Este piso ha sido eliminado. </trashed-message>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="update">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
-          <text-input v-model="form.first_name" :error="form.errors.first_name" class="pb-8 pr-6 w-full lg:w-1/2" label="First name" />
-          <text-input v-model="form.last_name" :error="form.errors.last_name" class="pb-8 pr-6 w-full lg:w-1/2" label="Last name" />
-          <text-input v-model="form.email" :error="form.errors.email" class="pb-8 pr-6 w-full lg:w-1/2" label="Email" />
-          <text-input v-model="form.password" :error="form.errors.password" class="pb-8 pr-6 w-full lg:w-1/2" type="password" autocomplete="new-password" label="Password" />
-          <select-input v-model="form.owner" :error="form.errors.owner" class="pb-8 pr-6 w-full lg:w-1/2" label="Owner">
-            <option :value="true">Yes</option>
-            <option :value="false">No</option>
-          </select-input>
-          <file-input v-model="form.photo" :error="form.errors.photo" class="pb-8 pr-6 w-full lg:w-1/2" type="file" accept="image/*" label="Photo" />
+          <text-input v-model="form.nombre" :error="form.errors.nombre" class="pb-8 pr-6 w-full lg:w-1/2" label="Nombre" />
+          <text-input v-model="form.fecha" :error="form.errors.fecha" class="pb-8 pr-6 w-full lg:w-1/2" type="date" label="Fecha" />
+          <text-input v-model="form.tipo_piso" :error="form.errors.tipo_piso" class="pb-8 pr-6 w-full lg:w-1/2" label="Tipo de piso" />
+          <text-input v-model="form.zona" :error="form.errors.zona" class="pb-8 pr-6 w-full lg:w-1/2" label="Zona" />
+          <text-input v-model="form.precio" :error="form.errors.precio" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Precio" />
+          <text-input v-model="form.num_hab" :error="form.errors.num_hab" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Número de habitaciones" />
+          <text-input v-model="form.muebles" :error="form.errors.muebles" class="pb-8 pr-6 w-full lg:w-1/2" label="Muebles" />
+          <text-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/2" label="Descripción" />
+          <text-input v-model="form.telefono" :error="form.errors.telefono" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Teléfono" />
+          <text-input v-model="form.propietario" :error="form.errors.propietario" class="pb-8 pr-6 w-full lg:w-1/2" label="Propietario" />
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
-          <button v-if="!user.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete User</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update User</loading-button>
+          <button v-if="!piso.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Eliminar piso</button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Actualizar piso</loading-button>
         </div>
       </form>
     </div>
@@ -53,36 +53,39 @@ export default {
   },
   layout: Layout,
   props: {
-    user: Object,
+    piso: Object,
   },
   remember: 'form',
   data() {
     return {
       form: this.$inertia.form({
         _method: 'put',
-        first_name: this.user.first_name,
-        last_name: this.user.last_name,
-        email: this.user.email,
-        password: '',
-        owner: this.user.owner,
-        photo: null,
+        nombre: this.piso.nombre,
+        fecha: this.piso.fecha,
+        tipo_piso: this.piso.tipo_piso,
+        zona: this.piso.zona,
+        precio: this.piso.precio,
+        num_hab: this.piso.num_hab,
+        muebles: this.piso.muebles,
+        descripcion: this.piso.descripcion,
+        telefono: this.piso.telefono,
+        propietario: this.piso.propietario,
       }),
     }
   },
   methods: {
     update() {
-      this.form.post(`/users/${this.user.id}`, {
-        onSuccess: () => this.form.reset('password', 'photo'),
+      this.form.put(`/pisos/${this.piso.id}`, {
       })
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this user?')) {
-        this.$inertia.delete(`/users/${this.user.id}`)
+      if (confirm('Estas seguro que quieres borrar este piso?')) {
+        this.$inertia.delete(`/pisos/${this.piso.id}`)
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this user?')) {
-        this.$inertia.put(`/users/${this.user.id}/restore`)
+      if (confirm('Estas seguro que quieres restaurar este piso?')) {
+        this.$inertia.put(`/pisos/${this.piso.id}/restore`)
       }
     },
   },

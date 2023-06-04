@@ -31,28 +31,28 @@
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/users/${user.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/users/${user.id}/edit`" tabindex="-1">
               {{ user.email }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/users/${user.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/users/${user.id}/edit`" tabindex="-1">
               {{ user.direccion }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4" :href="`/users/${user.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/users/${user.id}/edit`" tabindex="-1">
               {{ user.telefono }}
             </Link>
           </td>
           <td class="w-px border-t">
-            <Link class="flex items-center px-4" :href="`/users/${user.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-4 focus:text-green-500" :href="`/users/${user.id}/edit`" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
             </Link>
           </td>
         </tr>
         <tr v-if="users.length === 0">
-          <td class="px-6 py-4 border-t" colspan="4">No se han encontrado usuarios</td>
+          <td class="px-6 py-4 border-t" colspan="5">No se han encontrado usuarios</td>
         </tr>
       </table>
     </div>

@@ -18,6 +18,10 @@ module.exports = {
       red: colors.red,
       orange: colors.orange,
       yellow: colors.yellow,
+      cyan: colors.cyan,
+      lime: {
+        700: '#4d7c0f',
+      },
       green: {
         100: '#DAFAE6',
         200: '#BAF6CF',
