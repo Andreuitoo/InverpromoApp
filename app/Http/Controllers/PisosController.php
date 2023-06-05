@@ -43,7 +43,7 @@ class PisosController extends Controller
 
     public function store()
     {
-        Piso::create(
+        $piso = Piso::create(
             Request::validate([
                 'ref' => ['required', 'max:50'],
                 'fecha' => ['required', 'max:50'],
@@ -57,11 +57,22 @@ class PisosController extends Controller
                 'propietario' => ['required', 'max:50'],
             ])
         );
+
+        $fotos = Request::file('fotos');
+
+        if ($fotos) {
+            foreach ($fotos as $foto) {
+                $ruta = $foto->store('fotos', 'public');
+                $piso->fotos()->create(['ruta' => $ruta]);
+            }
+        }
         return Redirect::route('Pisos')->with('success', 'Piso añadido correctamente.');
     }
 
     public function edit(Piso $piso)
     {
+        $fotos = $piso->fotos()->get(['id', 'ruta']);
+
         return Inertia::render('Pisos/Edit', [
             'piso' => [
                 'id' => $piso->id,
@@ -75,6 +86,7 @@ class PisosController extends Controller
                 'descripcion' => $piso->descripcion,
                 'telefono' => $piso->telefono,
                 'propietario' => $piso->propietario,
+                'fotos' => $fotos,
             ],
         ]);
     }
@@ -90,13 +102,44 @@ class PisosController extends Controller
                 'precio' => ['required', 'max:50'],
                 'num_hab' => ['required', 'max:50'],
                 'muebles' => ['required', 'max:50'],
-                'descripcion' => ['required', 'max:50'],
+                'descripcion' => ['required', 'max:150'],
                 'telefono' => ['required', 'max:50'],
                 'propietario' => ['required', 'max:50'],
             ])
         );
 
+        $fotos = Request::file('fotos');
+
+        if ($fotos) {
+            foreach ($fotos as $foto) {
+                $ruta = $foto->store('fotos', 'public');
+                $piso->fotos()->create(['ruta' => $ruta]);
+            }
+        }
+
         return Redirect::back()->with('success', 'Piso actualizado correctamente.');
+    }
+
+    public function showPhotos(Piso $piso)
+    {
+        $fotos = $piso->fotos()->get(['ruta']);
+
+        return Inertia::render('Pisos/Fotos', [
+            'piso' => [
+                'id' => $piso->id,
+                'ref' => $piso->ref,
+                'fecha' => $piso->fecha,
+                'tipo_piso' => $piso->tipo_piso,
+                'zona' => $piso->zona,
+                'precio' => $piso->precio,
+                'num_hab' => $piso->num_hab,
+                'muebles' => $piso->muebles,
+                'descripcion' => $piso->descripcion,
+                'telefono' => $piso->telefono,
+                'propietario' => $piso->propietario,
+                'fotos' => $fotos,
+            ],
+        ]);
     }
 
     public function restore(Piso $piso)

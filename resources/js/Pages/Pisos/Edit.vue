@@ -22,6 +22,7 @@
           <text-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/2" label="Descripción" />
           <text-input v-model="form.telefono" :error="form.errors.telefono" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Teléfono" />
           <text-input v-model="form.propietario" :error="form.errors.propietario" class="pb-8 pr-6 w-full lg:w-1/2" label="Propietario" />
+          <file-input v-model="form.fotos" :error="form.errors.fotos" multiple class="pb-8 pr-6 w-full lg:w-1/2" label="Fotos" />
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
           <button v-if="!piso.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Eliminar piso</button>
@@ -70,6 +71,7 @@ export default {
         descripcion: this.piso.descripcion,
         telefono: this.piso.telefono,
         propietario: this.piso.propietario,
+        fotos: [],
       }),
     }
   },

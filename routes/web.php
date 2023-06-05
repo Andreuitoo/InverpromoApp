@@ -90,6 +90,10 @@ Route::put('pisos/{piso}', [PisosController::class, 'update'])
     ->name('Pisos.update')
     ->middleware('auth');
 
+Route::get('pisos/{piso}/fotos', [PisosController::class, 'showPhotos'])
+    ->name('Pisos.show')
+    ->middleware('auth');
+
 Route::delete('pisos/{piso}', [PisosController::class, 'destroy'])
     ->name('Pisos.destroy')
     ->middleware('auth');

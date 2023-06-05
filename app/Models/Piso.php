@@ -24,6 +24,11 @@ class Piso extends Model
         'propietario',
     ];
 
+    public function fotos()
+    {
+        return $this->hasMany(Foto::class);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {

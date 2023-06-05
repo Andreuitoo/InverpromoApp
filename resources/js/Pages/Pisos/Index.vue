@@ -20,6 +20,7 @@
           <th class="pb-4 pt-6 px-6">Nº Habs</th>
           <th class="pb-4 pt-6 px-6">Muebles</th>
           <th class="pb-4 pt-6 px-6">Teléfono</th>
+          <th class="pb-4 pt-6 px-6">Fotos</th>
           <th class="pb-4 pt-6 px-6">Propietario</th>
           <th class="pb-4 pt-6 px-6">Descripción</th>
         </tr>
@@ -66,6 +67,11 @@
             </Link>
           </td>
           <td class="border-t">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/fotos`" tabindex="-1">
+              Fotos
+            </Link>
+          </td>
+          <td class="border-t">
             <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
               {{ piso.propietario }}
             </Link>
@@ -93,7 +99,6 @@ import Layout from '@/Shared/Layout'
 import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import SearchFilter from '@/Shared/SearchFilter'
-import SearchFilter2 from '@/Shared/SearchFilter2'
 import Pagination from '@/Shared/Pagination'
 
 export default {
@@ -102,7 +107,6 @@ export default {
     Icon,
     Link,
     SearchFilter,
-    SearchFilter2,
     Pagination,
   },
   layout: Layout,
