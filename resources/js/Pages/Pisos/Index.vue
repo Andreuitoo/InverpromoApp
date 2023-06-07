@@ -67,7 +67,7 @@
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/fotos`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}`" tabindex="-1">
               Fotos
             </Link>
           </td>
@@ -83,7 +83,7 @@
           </td>
         </tr>
         <tr v-if="pisos.data.length === 0">
-          <td class="px-6 py-4 border-t" colspan="10">No se han encontrado pisos</td>
+          <td class="px-6 py-4 border-t" colspan="11">No se han encontrado pisos</td>
         </tr>
       </table>
     </div>

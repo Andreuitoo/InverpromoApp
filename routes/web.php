@@ -90,12 +90,20 @@ Route::put('pisos/{piso}', [PisosController::class, 'update'])
     ->name('Pisos.update')
     ->middleware('auth');
 
-Route::get('pisos/{piso}/fotos', [PisosController::class, 'showPhotos'])
-    ->name('Pisos.show')
+Route::get('pisos/{piso}', [PisosController::class, 'showPhotos'])
+    ->name('Pisos.showPhotos')
+    ->middleware('auth');
+
+Route::post('pisos/{piso}/add-photos', [PisosController::class, 'addPhoto'])
+    ->name('Pisos.addPhoto')
+    ->middleware('auth');
+
+Route::delete('pisos/{piso}/delete-photo/{fotoId}', [PisosController::class, 'deletePhoto'])
+    ->name('Pisos.deletePhoto')
     ->middleware('auth');
 
 Route::delete('pisos/{piso}', [PisosController::class, 'destroy'])
-    ->name('Pisos.destroy')
+    ->name('pisos.destroy')
     ->middleware('auth');
 
 Route::put('pisos/{piso}/restore', [PisosController::class, 'restore'])

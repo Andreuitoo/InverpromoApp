@@ -15,10 +15,10 @@ class CreateFotosTable extends Migration
     {
         Schema::create('fotos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('piso_id');
             $table->string('ruta');
-            $table->timestamps();
+            $table->unsignedBigInteger('piso_id');
             $table->foreign('piso_id')->references('id')->on('pisos')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

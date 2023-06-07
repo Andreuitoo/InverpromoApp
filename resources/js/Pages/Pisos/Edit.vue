@@ -14,15 +14,33 @@
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
           <text-input v-model="form.ref" :error="form.errors.ref" class="pb-8 pr-6 w-full lg:w-1/2" label="Referencia" />
           <text-input v-model="form.fecha" :error="form.errors.fecha" class="pb-8 pr-6 w-full lg:w-1/2" type="date" label="Fecha" />
-          <text-input v-model="form.tipo_piso" :error="form.errors.tipo_piso" class="pb-8 pr-6 w-full lg:w-1/2" label="Tipo de piso" />
+          <select-input v-model="form.tipo_piso" :error="form.errors.tipo_piso" class="pb-8 pr-6 w-full lg:w-1/2" label="Tipo de piso">
+            <option value="APAR">APAR</option>
+            <option value="TICO">TICO</option>
+            <option value="PISO">PISO</option>
+            <option value="ESTU">ESTU</option>
+            <option value="BAJA">BAJA</option>
+            <option value="ZOTI">ZOTI</option>
+            <option value="CASA">CASA</option>
+            <option value="DUPL">DUPL</option>
+            <option value="RUST">RUST</option>
+            <option value="XALE">XALE</option>
+            <option value="SADO">SADO</option>
+            <option value="LOFT">LOFT</option>
+            <option value="FINC">FINC</option>
+          </select-input>
           <text-input v-model="form.zona" :error="form.errors.zona" class="pb-8 pr-6 w-full lg:w-1/2" label="Zona" />
           <text-input v-model="form.precio" :error="form.errors.precio" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Precio" />
           <text-input v-model="form.num_hab" :error="form.errors.num_hab" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Número de habitaciones" />
-          <text-input v-model="form.muebles" :error="form.errors.muebles" class="pb-8 pr-6 w-full lg:w-1/2" label="Muebles" />
+          <select-input v-model="form.muebles" :error="form.errors.muebles" class="pb-8 pr-6 w-full lg:w-1/2" label="Muebles">
+            <option value="SIN">SIN</option>
+            <option value="CON">CON</option>
+            <option value="SEMI">SEMI</option>
+            <option value="EQUI">EQUI</option>
+          </select-input>
           <text-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/2" label="Descripción" />
           <text-input v-model="form.telefono" :error="form.errors.telefono" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Teléfono" />
           <text-input v-model="form.propietario" :error="form.errors.propietario" class="pb-8 pr-6 w-full lg:w-1/2" label="Propietario" />
-          <file-input v-model="form.fotos" :error="form.errors.fotos" multiple class="pb-8 pr-6 w-full lg:w-1/2" label="Fotos" />
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
           <button v-if="!piso.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Eliminar piso</button>
@@ -37,14 +55,14 @@
 import { Head, Link } from '@inertiajs/inertia-vue3'
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
-import FileInput from '@/Shared/FileInput'
+import FileInput2 from '@/Shared/FileInput2'
 import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
   components: {
-    FileInput,
+    FileInput2,
     Head,
     Link,
     LoadingButton,
@@ -71,7 +89,6 @@ export default {
         descripcion: this.piso.descripcion,
         telefono: this.piso.telefono,
         propietario: this.piso.propietario,
-        fotos: [],
       }),
     }
   },
