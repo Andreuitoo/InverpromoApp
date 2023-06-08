@@ -1,14 +1,14 @@
 <template>
   <div>
-    <Head title="Añadir demanda" />
+    <Head title="Añadir cliente" />
     <h1 class="mb-8 text-3xl font-bold">
-      <Link class="text-green-700 hover:text-green-500" href="/clientes">Demandas</Link>
-      <span class="text-green-700 font-medium">/</span> Crear una nueva demanda
+      <Link class="text-green-700 hover:text-green-500" href="/clientes">Clientes</Link>
+      <span class="text-green-700 font-medium">/</span> Crear un nuevo cliente
     </h1>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="store">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
-          <text-input v-model="form.ref" :error="form.errors.ref" class="pb-8 pr-6 w-full lg:w-1/2" placeholder="D-XXXX" label="Refrencia" />
+          <text-input v-model="form.ref" :error="form.errors.ref" class="pb-8 pr-6 w-full lg:w-1/2" placeholder="CXXXX" label="Refrencia" />
           <text-input v-model="form.nombre" :error="form.errors.nombre" class="pb-8 pr-6 w-full lg:w-1/2" label="Nombre" />
           <text-input v-model="form.telefono" :error="form.errors.telefono" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Teléfono" />
           <text-input v-model="form.telefono_2" :error="form.errors.telefono_2" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Segundo teléfono" />

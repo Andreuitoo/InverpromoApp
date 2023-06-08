@@ -1,28 +1,33 @@
 <template>
   <div>
-    <Head :title="`${form.name}`" />
+    <Head :title="`${form.ref}`" />
     <div class="flex justify-start mb-8 max-w-3xl">
       <h1 class="text-3xl font-bold">
-        <Link class="text-green-700 hover:text-green-500" href="/users">Usuarios</Link>
+        <Link class="text-green-700 hover:text-green-500" href="/clientes">Clientes</Link>
         <span class="text-green-700 font-medium">/</span>
-        {{ form.name }}
+        {{ form.ref }}
       </h1>
-      <img v-if="user.photo" class="block ml-4 w-8 h-8 rounded-full" :src="user.photo" />
     </div>
-    <trashed-message v-if="user.deleted_at" class="mb-6" @restore="restore"> Este usuario ha sido eliminado. </trashed-message>
+    <trashed-message v-if="cliente.deleted_at" class="mb-6" @restore="restore"> Esta cliente ha sido eliminado. </trashed-message>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="update">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
-          <text-input v-model="form.name" :error="form.errors.name" class="pb-8 pr-6 w-full lg:w-1/2" label="Nombre" />
-          <text-input v-model="form.email" :error="form.errors.email" class="pb-8 pr-6 w-full lg:w-1/2" label="Email" />
-          <text-input v-model="form.direccion" :error="form.errors.direccion" class="pb-8 pr-6 w-full lg:w-1/2" label="Dirección" />
-          <text-input v-model="form.telefono" :error="form.errors.telefono" class="pb-8 pr-6 w-full lg:w-1/2" label="Teléfono" />
-          <text-input v-model="form.password" :error="form.errors.password" class="pb-8 pr-6 w-full lg:w-1/2" type="password" autocomplete="new-password" label="Contraseña nueva" />
-          <file-input v-model="form.photo" :error="form.errors.photo" class="pb-8 pr-6 w-full lg:w-1/2" type="file" accept="image/*" label="Foto" />
+          <text-input v-model="form.ref" :error="form.errors.ref" class="pb-8 pr-6 w-full lg:w-1/2" placeholder="CXXXX" label="Refrencia" />
+          <text-input v-model="form.nombre" :error="form.errors.nombre" class="pb-8 pr-6 w-full lg:w-1/2" label="Nombre" />
+          <text-input v-model="form.telefono" :error="form.errors.telefono" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Teléfono" />
+          <text-input v-model="form.telefono_2" :error="form.errors.telefono_2" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Segundo teléfono" />
+          <text-input v-model="form.zona" :error="form.errors.zona" class="pb-8 pr-6 w-full lg:w-1/2" label="Zona" />
+          <text-input v-model="form.zona_2" :error="form.errors.zona_2" class="pb-8 pr-6 w-full lg:w-1/2" label="Segunda zona" />
+          <text-input v-model="form.num_hab" :error="form.errors.num_hab" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Nº Habitaciones mínimo" />
+          <text-input v-model="form.num_hab_2" :error="form.errors.num_hab_2" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Nº Habitaciones máximo" />
+          <text-input v-model="form.precio" :error="form.errors.precio" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Precio mínimo" />
+          <text-input v-model="form.precio_2" :error="form.errors.precio_2" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Precio máximo" />
+          <text-input v-model="form.fecha" :error="form.errors.fecha" class="pb-8 pr-6 w-full lg:w-1/2" type="date" label="Fecha" />
+          <text-area-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/2" label="Descripción" />
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
-          <button v-if="!user.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Eliminar usuario</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Actualizar usuario</loading-button>
+          <button v-if="!cliente.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Eliminar cliente</button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Actualizar cliente</loading-button>
         </div>
       </form>
     </div>
@@ -35,6 +40,7 @@ import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
 import FileInput from '@/Shared/FileInput'
 import SelectInput from '@/Shared/SelectInput'
+import TextAreaInput from '@/Shared/TextAreaInput'
 import LoadingButton from '@/Shared/LoadingButton'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
@@ -47,39 +53,44 @@ export default {
     SelectInput,
     TextInput,
     TrashedMessage,
+    TextAreaInput,
   },
   layout: Layout,
   props: {
-    user: Object,
+    cliente: Object,
   },
   remember: 'form',
   data() {
     return {
       form: this.$inertia.form({
         _method: 'put',
-        name: this.user.name,
-        email: this.user.email,
-        direccion: this.user.direccion,
-        telefono: this.user.telefono,
-        password: '',
-        photo: null,
+        ref: this.cliente.ref,
+        nombre: this.cliente.nombre,
+        telefono: this.cliente.telefono,
+        telefono_2: this.cliente.telefono_2,
+        zona: this.cliente.zona,
+        zona_2: this.cliente.zona_2,
+        num_hab: this.cliente.num_hab,
+        num_hab_2: this.cliente.num_hab_2,
+        precio: this.cliente.precio,
+        precio_2: this.cliente.precio_2,
+        fecha: this.cliente.fecha,
+        descripcion: this.cliente.descripcion,
       }),
     }
   },
   methods: {
     update() {
-      this.form.post(`/users/${this.user.id}`, {
-        onSuccess: () => this.form.reset('password', 'photo'),
-      })
+      this.form.post(`/clientes/${this.cliente.id}`)
     },
     destroy() {
-      if (confirm('Estas seguro que quieres borrar este usuario?')) {
-        this.$inertia.delete(`/users/${this.user.id}`)
+      if (confirm('Estas seguro que quieres borrar este cliente?')) {
+        this.$inertia.delete(`/clientes/${this.cliente.id}`)
       }
     },
     restore() {
-      if (confirm('Estas seguro que quieres restaurar este usuario?')) {
-        this.$inertia.put(`/users/${this.user.id}/restore`)
+      if (confirm('Estas seguro que quieres restaurar este cliente?')) {
+        this.$inertia.put(`/clientes/${this.cliente.id}/restore`)
       }
     },
   },

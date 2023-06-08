@@ -6,18 +6,10 @@ use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PisosController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ViviendasController;
+use App\Http\Controllers\DemandasController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 // Auth
 
@@ -32,11 +24,13 @@ Route::post('login', [AuthenticatedSessionController::class, 'store'])
 Route::delete('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
+
 // Dashboard
 
 Route::get('/', [DashboardController::class, 'index'])
     ->name('dashboard')
     ->middleware('auth');
+
 
 // Users
 
@@ -69,7 +63,7 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
     ->middleware('auth');
 
 
-// pisos
+// Pisos
 
 Route::get('pisos', [PisosController::class, 'index'])
     ->name('pisos')
@@ -140,6 +134,68 @@ Route::put('clientes/{cliente}/restore', [ClientesController::class, 'restore'])
 
 Route::delete('clientes/{cliente}', [ClientesController::class, 'destroy'])
     ->name('clientes.destroy')
+    ->middleware('auth');
+
+
+// Demandas
+
+Route::get('demandas', [DemandasController::class, 'index'])
+    ->name('demandas')
+    ->middleware('auth');
+
+Route::get('demandas/create', [DemandasController::class, 'create'])
+    ->name('demandas.create')
+    ->middleware('auth');
+
+Route::post('demandas', [DemandasController::class, 'store'])
+    ->name('demandas.store')
+    ->middleware('auth');
+
+Route::get('demandas/{demanda}/edit', [DemandasController::class, 'edit'])
+    ->name('demandas.edit')
+    ->middleware('auth');
+
+Route::put('demandas/{demanda}', [DemandasController::class, 'update'])
+    ->name('demandas.update')
+    ->middleware('auth');
+
+Route::put('demandas/{demanda}/restore', [DemandasController::class, 'restore'])
+    ->name('demandas.restore')
+    ->middleware('auth');
+
+Route::delete('demandas/{demanda}', [DemandasController::class, 'destroy'])
+    ->name('demandas.destroy')
+    ->middleware('auth');
+
+
+// Viviendas
+
+Route::get('viviendas', [ViviendasController::class, 'index'])
+    ->name('viviendas')
+    ->middleware('auth');
+
+Route::get('viviendas/create', [ViviendasController::class, 'create'])
+    ->name('viviendas.create')
+    ->middleware('auth');
+
+Route::post('viviendas', [ViviendasController::class, 'store'])
+    ->name('viviendas.store')
+    ->middleware('auth');
+
+Route::get('viviendas/{vivienda}/edit', [ViviendasController::class, 'edit'])
+    ->name('viviendas.edit')
+    ->middleware('auth');
+
+Route::put('viviendas/{vivienda}', [ViviendasController::class, 'update'])
+    ->name('viviendas.update')
+    ->middleware('auth');
+
+Route::put('viviendas/{vivienda}/restore', [ViviendasController::class, 'restore'])
+    ->name('viviendas.restore')
+    ->middleware('auth');
+
+Route::delete('viviendas/{vivienda}', [ViviendasController::class, 'destroy'])
+    ->name('viviendas.destroy')
     ->middleware('auth');
 
 
