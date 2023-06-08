@@ -14,8 +14,20 @@
     </div>
     <div class="mb-4">
       <Link class="group flex items-center py-3" href="/clientes">
-        <icon name="printer" class="mr-2 w-4 h-4" :class="isUrl('clientes') ? 'fill-cyan-200' : 'fill-white group-hover:fill-white'" />
-        <div :class="isUrl('clientes') ? 'text-cyan-200' : 'text-white group-hover:text-white'">Demandas</div>
+        <icon name="users" class="mr-2 w-4 h-4" :class="isUrl('clientes') ? 'fill-cyan-200' : 'fill-white group-hover:fill-white'" />
+        <div :class="isUrl('clientes') ? 'text-cyan-200' : 'text-white group-hover:text-white'">Demandas P</div>
+      </Link>
+    </div>
+    <div class="mb-4">
+      <Link class="group flex items-center py-3" href="/viviendas">
+        <icon name="house" class="mr-2 w-4 h-4" :class="isUrl('viviendas') ? 'fill-cyan-200' : 'fill-white group-hover:fill-white'" />
+        <div :class="isUrl('viviendas') ? 'text-cyan-200' : 'text-white group-hover:text-white'">Viviendas</div>
+      </Link>
+    </div>
+    <div class="mb-4">
+      <Link class="group flex items-center py-3" href="/demandas">
+        <icon name="users" class="mr-2 w-4 h-4" :class="isUrl('demandas') ? 'fill-cyan-200' : 'fill-white group-hover:fill-white'" />
+        <div :class="isUrl('demandas') ? 'text-cyan-200' : 'text-white group-hover:text-white'">Demandas V</div>
       </Link>
     </div>
   </div>

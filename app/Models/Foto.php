@@ -15,4 +15,9 @@ class Foto extends Model
     {
         return $this->belongsTo(Piso::class);
     }
+
+    public function vivienda()
+    {
+        return $this->belongsTo(Vivienda::class);
+    }
 }

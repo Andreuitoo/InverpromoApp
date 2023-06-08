@@ -18,6 +18,8 @@ class CreateFotosTable extends Migration
             $table->string('ruta');
             $table->unsignedBigInteger('piso_id');
             $table->foreign('piso_id')->references('id')->on('pisos')->onDelete('cascade');
+            $table->unsignedBigInteger('vivienda_id');
+            $table->foreign('vivienda_id')->references('id')->on('viviendas')->onDelete('cascade');
             $table->timestamps();
         });
     }
