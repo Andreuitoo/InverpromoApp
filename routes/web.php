@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PisosController;
+use App\Http\Controllers\ClientesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -68,38 +69,38 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
     ->middleware('auth');
 
 
-// Pisos
+// pisos
 
 Route::get('pisos', [PisosController::class, 'index'])
-    ->name('Pisos')
+    ->name('pisos')
     ->middleware('auth');
 
 Route::get('pisos/create', [PisosController::class, 'create'])
-    ->name('Pisos.create')
+    ->name('pisos.create')
     ->middleware('auth');
 
 Route::post('pisos', [PisosController::class, 'store'])
-    ->name('Pisos.store')
+    ->name('pisos.store')
     ->middleware('auth');
 
 Route::get('pisos/{piso}/edit', [PisosController::class, 'edit'])
-    ->name('Pisos.edit')
+    ->name('pisos.edit')
     ->middleware('auth');
 
 Route::put('pisos/{piso}', [PisosController::class, 'update'])
-    ->name('Pisos.update')
+    ->name('pisos.update')
     ->middleware('auth');
 
 Route::get('pisos/{piso}', [PisosController::class, 'showPhotos'])
-    ->name('Pisos.showPhotos')
+    ->name('pisos.showPhotos')
     ->middleware('auth');
 
 Route::post('pisos/{piso}/add-photos', [PisosController::class, 'addPhoto'])
-    ->name('Pisos.addPhoto')
+    ->name('pisos.addPhoto')
     ->middleware('auth');
 
 Route::delete('pisos/{piso}/delete-photo/{fotoId}', [PisosController::class, 'deletePhoto'])
-    ->name('Pisos.deletePhoto')
+    ->name('pisos.deletePhoto')
     ->middleware('auth');
 
 Route::delete('pisos/{piso}', [PisosController::class, 'destroy'])
@@ -107,7 +108,38 @@ Route::delete('pisos/{piso}', [PisosController::class, 'destroy'])
     ->middleware('auth');
 
 Route::put('pisos/{piso}/restore', [PisosController::class, 'restore'])
-    ->name('Pisos.restore')
+    ->name('pisos.restore')
+    ->middleware('auth');
+
+
+// Clientes
+
+Route::get('clientes', [ClientesController::class, 'index'])
+    ->name('clientes')
+    ->middleware('auth');
+
+Route::get('clientes/create', [ClientesController::class, 'create'])
+    ->name('clientes.create')
+    ->middleware('auth');
+
+Route::post('clientes', [ClientesController::class, 'store'])
+    ->name('clientes.store')
+    ->middleware('auth');
+
+Route::get('clientes/{cliente}/edit', [ClientesController::class, 'edit'])
+    ->name('clientes.edit')
+    ->middleware('auth');
+
+Route::put('clientes/{cliente}', [ClientesController::class, 'update'])
+    ->name('clientes.update')
+    ->middleware('auth');
+
+Route::put('clientes/{cliente}/restore', [ClientesController::class, 'restore'])
+    ->name('clientes.restore')
+    ->middleware('auth');
+
+Route::delete('clientes/{cliente}', [ClientesController::class, 'destroy'])
+    ->name('clientes.destroy')
     ->middleware('auth');
 
 

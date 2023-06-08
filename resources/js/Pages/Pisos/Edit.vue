@@ -38,7 +38,7 @@
             <option value="SEMI">SEMI</option>
             <option value="EQUI">EQUI</option>
           </select-input>
-          <text-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/2" label="Descripción" />
+          <text-area-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/2" label="Descripción" />
           <text-input v-model="form.telefono" :error="form.errors.telefono" class="pb-8 pr-6 w-full lg:w-1/2" type="number" label="Teléfono" />
           <text-input v-model="form.propietario" :error="form.errors.propietario" class="pb-8 pr-6 w-full lg:w-1/2" label="Propietario" />
         </div>
@@ -55,6 +55,7 @@
 import { Head, Link } from '@inertiajs/inertia-vue3'
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
+import TextAreaInput from '@/Shared/TextAreaInput'
 import FileInput2 from '@/Shared/FileInput2'
 import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
@@ -68,6 +69,7 @@ export default {
     LoadingButton,
     SelectInput,
     TextInput,
+    TextAreaInput,
     TrashedMessage,
   },
   layout: Layout,

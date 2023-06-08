@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class Clientes extends Model
+class Cliente extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $table = 'clientes';
 
     protected $fillable = [
+        'ref',
         'nombre',
         'fecha',
         'telefono',
@@ -35,7 +36,8 @@ class Clientes extends Model
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
-                $query->where('nombre', 'like', '%'.$search.'%')
+                $query->where('ref', 'like', '%'.$search.'%')
+                    >orWhere('nombre', 'like', '%'.$search.'%')
                     ->orWhere('fecha', 'like', '%'.$search.'%');
             });
         });
