@@ -8,7 +8,7 @@
         {{ form.ref }}
       </h1>
     </div>
-    <trashed-message v-if="cliente.deleted_at" class="mb-6" @restore="restore"> Esta cliente ha sido eliminado. </trashed-message>
+    <trashed-message v-if="cliente.deleted_at" class="mb-6" @restore="restore"> Este cliente ha sido eliminado. </trashed-message>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="update">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
