@@ -62,7 +62,7 @@ class ClientesController extends Controller
             ])
         );
 
-        return Redirect::route('clientes')->with('success', 'Demanda creada.');
+        return Redirect::route('clientes')->with('success', 'Cliente creada.');
     }
 
     public function edit(Cliente $cliente)
@@ -106,20 +106,20 @@ class ClientesController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'Demanda actualizada.');
+        return Redirect::back()->with('success', 'Cliente actualizada.');
     }
 
     public function restore(Cliente $cliente)
     {
         $cliente->restore();
 
-        return Redirect::back()->with('success', 'Demanda restaurada.');
+        return Redirect::back()->with('success', 'Cliente restaurada.');
     }
 
     public function destroy(Cliente $cliente)
     {
         $cliente->delete();
 
-        return Redirect::back()->with('success', 'Demanda eliminada.');
+        return Redirect::back()->with('success', 'Cliente eliminada.');
     }
 }
