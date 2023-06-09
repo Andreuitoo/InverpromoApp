@@ -11,8 +11,8 @@ class Foto extends Model
 
     protected $fillable = ['ruta'];
 
-    public function piso()
+    public function vivienda()
     {
-        return $this->belongsTo(Piso::class);
+        return $this->belongsTo(Vivienda::class);
     }
 }

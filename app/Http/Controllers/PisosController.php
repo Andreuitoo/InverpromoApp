@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Piso;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
@@ -69,7 +68,7 @@ class PisosController extends Controller
             }
         }
 
-        return Redirect::route('Pisos')->with('success', 'Piso añadido correctamente.');
+        return Redirect::route('pisos')->with('success', 'Piso añadido correctamente.');
     }
 
     public function edit(Piso $piso)

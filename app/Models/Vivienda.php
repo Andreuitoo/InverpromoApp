@@ -42,9 +42,9 @@ class Vivienda extends Model
         'descripcion',
     ];
 
-    public function fotos()
+    public function fotosVivienda()
     {
-        return $this->hasMany(Foto::class);
+        return $this->hasMany(fotosVivienda::class);
     }
 
     public function resolveRouteBinding($value, $field = null)

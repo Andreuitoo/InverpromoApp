@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vivienda;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
 
 class ViviendasController extends Controller
@@ -18,7 +16,7 @@ class ViviendasController extends Controller
             'viviendas' => Vivienda::query()
                 ->orderBy('ref', 'desc')
                 ->filter(Request::only('search'))
-                ->paginate(10)
+                ->paginate(50)
                 ->withQueryString()
                 ->through(fn ($vivienda) => [
                     'id' => $vivienda->id,
@@ -64,34 +62,34 @@ class ViviendasController extends Controller
     {
         $vivienda = Vivienda::create(
             Request::validate([
-                'ref' => ['required', 'max:10'],
-                'fecha' => ['required', 'max:10'],
-                'nota' => ['required', 'max:10'],
-                'tipo' => ['required', 'max:10'],
-                'propietario' => ['required', 'max:10'],
-                'telefono' => ['required', 'max:10'],
-                'zona' => ['required', 'max:10'],
-                'zona_2' => ['required', 'max:10'],
-                'precio_prop' => ['required', 'max:10'],
-                'precio_venta' => ['required', 'max:10'],
-                'terraza' => ['required', 'max:10'],
-                'num_hab' => ['required', 'max:10'],
-                'num_banos' => ['required', 'max:10'],
-                'ascensor' => ['required', 'max:10'],
-                'altura_planta' => ['required', 'max:10'],
-                'coladuria' => ['required', 'max:10'],
-                'garaje' => ['required', 'max:10'],
-                'piscina' => ['required', 'max:10'],
-                'balcon' => ['required', 'max:10'],
-                'm2' => ['required', 'max:10'],
-                'estado' => ['required', 'max:10'],
-                'muebles' => ['required', 'max:10'],
-                'carpinteria_int' => ['required', 'max:10'],
-                'carpinteria_ext' => ['required', 'max:10'],
-                'zona_comunitaria' => ['required', 'max:10'],
-                'antiguedad' => ['required', 'max:10'],
-                'direccion' => ['required', 'max:10'],
-                'descripcion' => ['required', 'max:10'],
+                'ref' => ['required', 'max:50'],
+                'fecha' => ['required', 'max:50'],
+                'nota' => ['required', 'max:50'],
+                'tipo' => ['required', 'max:50'],
+                'propietario' => ['required', 'max:50'],
+                'telefono' => ['required', 'max:50'],
+                'zona' => ['required', 'max:50'],
+                'zona_2' => ['required', 'max:50'],
+                'precio_prop' => ['required', 'max:50'],
+                'precio_venta' => ['required', 'max:50'],
+                'terraza' => ['required', 'max:50'],
+                'num_hab' => ['required', 'max:50'],
+                'num_banos' => ['required', 'max:50'],
+                'ascensor' => ['required', 'max:50'],
+                'altura_planta' => ['required', 'max:50'],
+                'coladuria' => ['required', 'max:50'],
+                'garaje' => ['required', 'max:50'],
+                'piscina' => ['required', 'max:50'],
+                'balcon' => ['required', 'max:50'],
+                'm2' => ['required', 'max:50'],
+                'estado' => ['required', 'max:50'],
+                'muebles' => ['required', 'max:50'],
+                'carpinteria_int' => ['required', 'max:50'],
+                'carpinteria_ext' => ['required', 'max:50'],
+                'zona_comunitaria' => ['required', 'max:50'],
+                'antiguedad' => ['required', 'max:50'],
+                'direccion' => ['required', 'max:50'],
+                'descripcion' => ['required', 'max:50'],
             ])
         );
 
@@ -140,34 +138,34 @@ class ViviendasController extends Controller
     {
         $vivienda->update(
             Request::validate([
-                'ref' => ['required', 'max:10'],
-                'fecha' => ['required', 'max:10'],
-                'nota' => ['required', 'max:10'],
-                'tipo' => ['required', 'max:10'],
-                'propietario' => ['required', 'max:10'],
-                'telefono' => ['required', 'max:10'],
-                'zona' => ['required', 'max:10'],
-                'zona_2' => ['required', 'max:10'],
-                'precio_prop' => ['required', 'max:10'],
-                'precio_venta' => ['required', 'max:10'],
-                'terraza' => ['required', 'max:10'],
-                'num_hab' => ['required', 'max:10'],
-                'num_banos' => ['required', 'max:10'],
-                'ascensor' => ['required', 'max:10'],
-                'altura_planta' => ['required', 'max:10'],
-                'coladuria' => ['required', 'max:10'],
-                'garaje' => ['required', 'max:10'],
-                'piscina' => ['required', 'max:10'],
-                'balcon' => ['required', 'max:10'],
-                'm2' => ['required', 'max:10'],
-                'estado' => ['required', 'max:10'],
-                'muebles' => ['required', 'max:10'],
-                'carpinteria_int' => ['required', 'max:10'],
-                'carpinteria_ext' => ['required', 'max:10'],
-                'zona_comunitaria' => ['required', 'max:10'],
-                'antiguedad' => ['required', 'max:10'],
-                'direccion' => ['required', 'max:10'],
-                'descripcion' => ['required', 'max:10'],
+                'ref' => ['required', 'max:50'],
+                'fecha' => ['required', 'max:50'],
+                'nota' => ['required', 'max:50'],
+                'tipo' => ['required', 'max:50'],
+                'propietario' => ['required', 'max:50'],
+                'telefono' => ['required', 'max:50'],
+                'zona' => ['required', 'max:50'],
+                'zona_2' => ['required', 'max:50'],
+                'precio_prop' => ['required', 'max:50'],
+                'precio_venta' => ['required', 'max:50'],
+                'terraza' => ['required', 'max:50'],
+                'num_hab' => ['required', 'max:50'],
+                'num_banos' => ['required', 'max:50'],
+                'ascensor' => ['required', 'max:50'],
+                'altura_planta' => ['required', 'max:50'],
+                'coladuria' => ['required', 'max:50'],
+                'garaje' => ['required', 'max:50'],
+                'piscina' => ['required', 'max:50'],
+                'balcon' => ['required', 'max:50'],
+                'm2' => ['required', 'max:50'],
+                'estado' => ['required', 'max:50'],
+                'muebles' => ['required', 'max:50'],
+                'carpinteria_int' => ['required', 'max:50'],
+                'carpinteria_ext' => ['required', 'max:50'],
+                'zona_comunitaria' => ['required', 'max:50'],
+                'antiguedad' => ['required', 'max:50'],
+                'direccion' => ['required', 'max:50'],
+                'descripcion' => ['required', 'max:50'],
             ])
         );
 

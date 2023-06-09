@@ -62,7 +62,7 @@ class DemandasController extends Controller
             ])
         );
 
-        return Redirect::route('Demandas')->with('success', 'Demanda creada.');
+        return Redirect::route('demandas')->with('success', 'Demanda creada.');
     }
 
     public function edit(Demanda $demanda)
