@@ -56,22 +56,12 @@
           </td>
           <td class="border-t">
             <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/edit`" tabindex="-1">
-              {{ vivienda.muebles }}
+              {{ vivienda.zona }}
             </Link>
           </td>
           <td class="border-t">
             <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/edit`" tabindex="-1">
-              {{ vivienda.telefono }}
-            </Link>
-          </td>
-          <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/edit`" tabindex="-1">
-              {{ vivienda.propietario }}
-            </Link>
-          </td>
-          <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/edit`" tabindex="-1">
-              {{ vivienda.descripcion }}
+              {{ vivienda.precio }}
             </Link>
           </td>
           <td class="border-t">
@@ -81,7 +71,7 @@
           </td>
         </tr>
         <tr v-if="viviendas.data.length === 0">
-          <td class="px-6 py-4 border-t" colspan="11">No se han encontrado viviendas</td>
+          <td class="px-6 py-4 border-t" colspan="9">No se han encontrado viviendas</td>
         </tr>
       </table>
     </div>

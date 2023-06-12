@@ -93,11 +93,22 @@ class ViviendasController extends Controller
             ])
         );
 
+        $fotos = Request::file('fotosViviendas');
+        
+        if ($fotos) {
+            foreach ($fotos as $foto) {
+                $ruta = $foto->store('fotos_viviendas');
+                $vivienda->fotos()->create(['ruta' => $ruta,]);
+            }
+        }
+
         return Redirect::route('viviendas')->with('success', 'Vivienda añadida correctamente.');
     }
 
     public function edit(Vivienda $vivienda)
     {
+        $fotos = $vivienda->fotos()->get(['id', 'ruta']);
+
         return Inertia::render('Viviendas/Edit', [
             'vivienda' => [
                 'id' => $vivienda->id,
@@ -129,6 +140,7 @@ class ViviendasController extends Controller
                 'antiguedad' => $vivienda->antiguedad,
                 'direccion' => $vivienda->direccion,
                 'descripcion' => $vivienda->descripcion,
+                'fotos' => $fotos,
                 'deleted_at' => $vivienda->deleted_at,
             ],
         ]);
@@ -168,6 +180,15 @@ class ViviendasController extends Controller
                 'descripcion' => ['required', 'max:50'],
             ])
         );
+
+        $fotos = Request::file('fotosViviendas');
+
+        if ($fotos) {
+            foreach ($fotos as $foto) {
+                $ruta = $foto->store('fotos_viviendas');
+                $vivienda->fotos()->create(['ruta' => $ruta,]);
+            }
+        }
 
         return Redirect::back()->with('success', 'Vivienda actualizada correctamente.');
     }
