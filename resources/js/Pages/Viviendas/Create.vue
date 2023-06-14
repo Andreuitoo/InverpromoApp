@@ -2,7 +2,7 @@
   <div>
     <Head title="Añadir vivienda" />
     <h1 class="mb-8 text-3xl font-bold">
-      <Link class="text-green-700 hover:text-green-500" href="/viviendas">viviendas</Link>
+      <Link class="text-green-700 hover:text-green-500" href="/viviendas">Viviendas</Link>
       <span class="text-green-700 font-medium">/</span> Añadir vivienda
     </h1>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
