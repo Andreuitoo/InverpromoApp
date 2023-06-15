@@ -23,7 +23,7 @@
             <option value="ZOTI">ZOTI</option>
             <option value="CASA">Casa</option>
             <option value="DUPL">Dúplex</option>
-            <option value="RUST">RUST</option>
+            <option value="RUST">Rústico</option>
             <option value="XALE">Chalet</option>
             <option value="SADO">Adosado</option>
             <option value="LOFT">Loft</option>
