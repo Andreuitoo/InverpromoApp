@@ -107,7 +107,7 @@ class ViviendasController extends Controller
 
     public function edit(Vivienda $vivienda)
     {
-        $fotos = $vivienda->fotos()->get(['id', 'ruta']);
+        $fotos = $vivienda->fotosVivienda()->get(['id', 'ruta']);
 
         return Inertia::render('Viviendas/Edit', [
             'vivienda' => [
