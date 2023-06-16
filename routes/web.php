@@ -186,8 +186,24 @@ Route::get('viviendas/{vivienda}/edit', [ViviendasController::class, 'edit'])
     ->name('viviendas.edit')
     ->middleware('auth');
 
+Route::get('viviendas/{vivienda}/show', [ViviendasController::class, 'show'])
+    ->name('viviendas.show')
+    ->middleware('auth');
+
 Route::put('viviendas/{vivienda}', [ViviendasController::class, 'update'])
     ->name('viviendas.update')
+    ->middleware('auth');
+
+Route::get('viviendas/{vivienda}/fotos', [ViviendasController::class, 'showPhotos'])
+    ->name('viviendas.showPhotos')
+    ->middleware('auth');
+
+Route::post('viviendas/{vivienda}/add-photos', [ViviendasController::class, 'addPhoto'])
+    ->name('viviendas.addPhoto')
+    ->middleware('auth');
+
+Route::delete('viviendas/{vivienda}/delete-photo/{fotoId}', [ViviendasController::class, 'deletePhoto'])
+    ->name('viviendas.deletePhoto')
     ->middleware('auth');
 
 Route::put('viviendas/{vivienda}/restore', [ViviendasController::class, 'restore'])

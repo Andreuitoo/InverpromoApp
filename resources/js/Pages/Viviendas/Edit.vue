@@ -8,7 +8,7 @@
         {{ form.ref }}
       </h1>
     </div>
-    <trashed-message v-if="vivienda.deleted_at" class="mb-6" @restore="restore"> Este piso ha sido eliminado. </trashed-message>
+    <trashed-message v-if="vivienda.deleted_at" class="mb-6" @restore="restore"> Esta vivienda ha sido eliminada. </trashed-message>
     <div class="max-w-8xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="update">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
@@ -79,8 +79,8 @@
           <text-area-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/3" label="Descripción" />
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
-          <button v-if="!piso.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Eliminar piso</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Actualizar piso</loading-button>
+          <button v-if="!vivienda.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Eliminar vivienda</button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Actualizar vivienda</loading-button>
         </div>
       </form>
     </div>
@@ -116,7 +116,6 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        _method: 'put',
         ref: this.vivienda.ref,
         fecha: this.vivienda.fecha,
         nota: this.vivienda.nota,
