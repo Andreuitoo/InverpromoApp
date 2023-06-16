@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Vivienda;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
 
 class ViviendasController extends Controller
@@ -93,12 +94,12 @@ class ViviendasController extends Controller
             ])
         );
 
-        $fotos = Request::file('fotosViviendas');
+        $fotos = Request::file('fotos');
         
         if ($fotos) {
             foreach ($fotos as $foto) {
-                $ruta = $foto->store('fotos_viviendas');
-                $vivienda->fotos()->create(['ruta' => $ruta,]);
+                $ruta = $foto->store('fotosViviendas');
+                $vivienda->fotosVivienda()->create(['ruta' => $ruta,]);
             }
         }
 
@@ -107,8 +108,6 @@ class ViviendasController extends Controller
 
     public function edit(Vivienda $vivienda)
     {
-        $fotos = $vivienda->fotosVivienda()->get(['id', 'ruta']);
-
         return Inertia::render('Viviendas/Edit', [
             'vivienda' => [
                 'id' => $vivienda->id,
@@ -140,7 +139,6 @@ class ViviendasController extends Controller
                 'antiguedad' => $vivienda->antiguedad,
                 'direccion' => $vivienda->direccion,
                 'descripcion' => $vivienda->descripcion,
-                'fotos' => $fotos,
                 'deleted_at' => $vivienda->deleted_at,
             ],
         ]);
@@ -181,16 +179,99 @@ class ViviendasController extends Controller
             ])
         );
 
-        $fotos = Request::file('fotosViviendas');
+        $fotos = Request::file('fotos');
 
         if ($fotos) {
             foreach ($fotos as $foto) {
-                $ruta = $foto->store('fotos_viviendas');
-                $vivienda->fotos()->create(['ruta' => $ruta,]);
+                $ruta = $foto->store('fotosViviendas');
+                $vivienda->fotosVivienda()->create(['ruta' => $ruta,]);
             }
         }
 
         return Redirect::back()->with('success', 'Vivienda actualizada correctamente.');
+    }
+
+    public function show (Vivienda $vivienda)
+    {
+        return Inertia::render('Viviendas/Show', [
+            'vivienda' => [
+                'id' => $vivienda->id,
+                'ref' => $vivienda->ref,
+                'fecha' => $vivienda->fecha,
+                'nota' => $vivienda->nota,
+                'tipo' => $vivienda->tipo,
+                'propietario' => $vivienda->propietario,
+                'telefono' => $vivienda->telefono,
+                'zona' => $vivienda->zona,
+                'zona_2' => $vivienda->zona_2,
+                'precio_prop' => $vivienda->precio_prop,
+                'precio_venta' => $vivienda->precio_venta,
+                'terraza' => $vivienda->terraza,
+                'num_hab' => $vivienda->num_hab,
+                'num_banos' => $vivienda->num_banos,
+                'ascensor' => $vivienda->ascensor,
+                'altura_planta' => $vivienda->altura_planta,
+                'coladuria' => $vivienda->coladuria,
+                'garaje' => $vivienda->garaje,
+                'piscina' => $vivienda->piscina,
+                'balcon' => $vivienda->balcon,
+                'm2' => $vivienda->m2,
+                'estado' => $vivienda->estado,
+                'muebles' => $vivienda->muebles,
+                'carpinteria_int' => $vivienda->carpinteria_int,
+                'carpinteria_ext' => $vivienda->carpinteria_ext,
+                'zona_comunitaria' => $vivienda->zona_comunitaria,
+                'antiguedad' => $vivienda->antiguedad,
+                'direccion' => $vivienda->direccion,
+                'descripcion' => $vivienda->descripcion,
+                'deleted_at' => $vivienda->deleted_at,
+            ],
+        ]);
+    }
+
+    public function showPhotos(Vivienda $vivienda)
+    {
+        $fotos = $vivienda->fotosVivienda()->get(['id', 'ruta']);
+
+        $fotosUrls = $fotos->map(function ($foto) {
+            return [
+                'id' => $foto->id,
+                'ruta' => $foto->ruta ? URL::route('image', ['path' => $foto->ruta]) : null,
+            ];
+        });
+
+        return Inertia::render('Viviendas/Fotos', [
+            'vivienda' => [
+                'id' => $vivienda->id,
+                'ref' => $vivienda->ref,
+                'fotos' => $fotosUrls,
+            ],
+        ]);
+    }
+
+    public function addPhoto(Vivienda $vivienda)
+    {
+        $fotos = Request::file('fotos');
+
+        if ($fotos) {
+            foreach ($fotos as $foto) {
+                $ruta = $foto->store('fotosViviendas');
+                $vivienda->fotosVivienda()->create(['ruta' => $ruta]);
+            }
+        }
+
+        return Redirect::back()->with('success', 'Foto añadida correctamente.');
+    }
+
+    public function deletePhoto(Vivienda $vivienda, $fotoId)
+    {
+        $fotoEliminada = $vivienda->fotosVivienda()->where('id', $fotoId)->delete();
+
+        if ($fotoEliminada) {
+            return Redirect::back()->with('success', 'Foto eliminada correctamente.');
+        } else {
+            return Redirect::back()->with('error', 'No se pudo eliminar la foto.');
+        }
     }
 
     public function restore(Vivienda $vivienda)

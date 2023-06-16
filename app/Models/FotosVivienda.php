@@ -9,6 +9,8 @@ class FotosVivienda extends Model
 {
     use HasFactory;
 
+    protected $table = 'fotosViviendas';
+
     protected $fillable = ['ruta'];
 
     public function vivienda()

@@ -15,11 +15,12 @@
           <th class="pb-4 pt-6 px-6">Referencia</th>
           <th class="pb-4 pt-6 px-6">Fecha</th>
           <th class="pb-4 pt-6 px-6">Nota</th>
-          <th class="pb-4 pt-6 px-6">Tipo de vivienda</th>
+          <th class="pb-4 pt-6 px-6">Tipo vivienda</th>
           <th class="pb-4 pt-6 px-6">Propietario</th>
           <th class="pb-4 pt-6 px-6">Teléfono</th>
           <th class="pb-4 pt-6 px-6">Zona</th>
-          <th class="pb-4 pt-6 px-6">Precio</th>
+          <th class="pb-4 pt-6 px-6">Precio prop</th>
+          <th class="pb-4 pt-6 px-6">Precio venta</th>
           <th class="pb-4 pt-6 px-6">Fotos</th>
         </tr>
         <tr v-for="vivienda in viviendas.data" :key="vivienda.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
@@ -30,48 +31,67 @@
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/show`" tabindex="-1">
               {{ vivienda.fecha }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/show`" tabindex="-1">
               {{ vivienda.nota }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/show`" tabindex="-1">
               {{ vivienda.tipo }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/show`" tabindex="-1">
               {{ vivienda.propietario }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/edit`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/show`" tabindex="-1">
               {{ vivienda.telefono }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/edit`" tabindex="-1">
-              {{ vivienda.zona }}
+            <dropdown2 class="mt-1" placement="bottom-end">
+              <template #default>
+                <div class="group flex items-center cursor-pointer select-none">
+                  <div class="flex items-center px-2 py-4 focus:text-green-500">
+                    {{ vivienda.zona }}
+                  </div>
+                  <icon class="w-5 h-5 fill-gray-700 group-hover:fill-green-600 focus:fill-green-600" name="cheveron-down" />
+                </div>
+              </template>
+              <template #dropdown>
+                <div class="mt-2 py-2 text-sm bg-white rounded shadow-xl">
+                  <div class="flex items-center px-6 py-4 focus:text-green-500">
+                    {{ vivienda.zona_2 ? vivienda.zona_2 : 'No tiene otra zona' }}
+                  </div>
+                </div>
+              </template>
+            </dropdown2>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/show`" tabindex="-1">
+              {{ vivienda.precio_prop }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/edit`" tabindex="-1">
-              {{ vivienda.precio }}
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/show`" tabindex="-1">
+              {{ vivienda.precio_venta }}
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}`" tabindex="-1">
+            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/viviendas/${vivienda.id}/fotos`" tabindex="-1">
               Fotos
             </Link>
           </td>
         </tr>
         <tr v-if="viviendas.data.length === 0">
-          <td class="px-6 py-4 border-t" colspan="9">No se han encontrado viviendas</td>
+          <td class="px-6 py-4 border-t" colspan="10">No se han encontrado viviendas</td>
         </tr>
       </table>
     </div>
@@ -88,7 +108,7 @@ import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import SearchFilter from '@/Shared/SearchFilter'
 import Pagination from '@/Shared/Pagination'
-import Dropdown from '@/Shared/Dropdown'
+import Dropdown2 from '@/Shared/Dropdown2'
 
 export default {
   components: {
@@ -97,7 +117,7 @@ export default {
     Link,
     SearchFilter,
     Pagination,
-    Dropdown,
+    Dropdown2,
   },
   layout: Layout,
   props: {
