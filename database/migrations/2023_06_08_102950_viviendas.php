@@ -42,7 +42,7 @@ class Viviendas extends Migration
             $table->string('zona_comunitaria')->nullable();
             $table->string('antiguedad')->nullable();
             $table->string('direccion')->nullable();
-            $table->string('descripcion', 3000)->nullable();
+            $table->string('descripcion', 5000)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

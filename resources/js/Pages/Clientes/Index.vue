@@ -1,12 +1,13 @@
 <template>
   <div>
+
     <Head title="Clientes" />
     <h1 class="mb-8 text-3xl font-bold">Clientes</h1>
     <div class="flex items-center justify-between mb-6">
       <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset" />
       <Link class="btn-indigo" href="/clientes/create">
-        <span>Añadir</span>
-        <span class="hidden md:inline">&nbsp;cliente</span>
+      <span>Añadir</span>
+      <span class="hidden md:inline">&nbsp;cliente</span>
       </Link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
@@ -24,8 +25,8 @@
         <tr v-for="cliente in clientes.data" :key="cliente.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/clientes/${cliente.id}/edit`">
-              {{ cliente.ref }}
-              <icon v-if="cliente.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
+            {{ cliente.ref }}
+            <icon v-if="cliente.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
             </Link>
           </td>
           <td class="border-t">
@@ -78,7 +79,7 @@
           </td>
           <td class="border-t">
             <div class="flex items-center px-6 py-4 focus:text-green-500">
-              De {{ cliente.num_hab}} a {{ cliente.num_hab_2 ? cliente.num_hab_2 : 'No tiene otro nº habs' }}
+              De {{ cliente.num_hab }} a {{ cliente.num_hab_2 ? cliente.num_hab_2 : 'No tiene otro nº habs' }}
             </div>
           </td>
           <td class="border-t">
@@ -88,7 +89,13 @@
           </td>
           <td class="border-t">
             <div class="flex items-center px-6 py-4 focus:text-green-500">
-              {{ cliente.descripcion ? cliente.descripcion : 'No tiene descripción' }}
+              <div v-if="cliente.descripcion.length > 100">
+                {{ cliente.descripcion.slice(0, 100) + '...' }}
+                <a class="cursor-pointer text-green-500 underline" @click="mostrarDescripcionCompleta">Ver más</a>
+              </div>
+              <div v-else>
+                {{ cliente.descripcion }}
+              </div>
             </div>
           </td>
         </tr>
@@ -142,6 +149,14 @@ export default {
     reset() {
       this.form = mapValues(this.form, () => null)
     },
+    mostrarDescripcionCompleta() {
+      Swal.fire({
+        title: 'Descripción completa',
+        text: this.cliente.descripcion,
+        icon: 'info',
+        confirmButtonText: 'Cerrar'
+      });
+    }
   },
 }
 </script>

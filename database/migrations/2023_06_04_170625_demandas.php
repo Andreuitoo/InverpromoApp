@@ -26,7 +26,7 @@ class Demandas extends Migration
             $table->integer('num_hab_2')->nullable();
             $table->integer('precio')->nullable();
             $table->integer('precio_2')->nullable();
-            $table->string('descripcion', 3000)->nullable();
+            $table->string('descripcion', 5000)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
