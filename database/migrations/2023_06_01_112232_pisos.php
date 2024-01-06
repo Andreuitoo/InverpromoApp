@@ -22,7 +22,7 @@ class Pisos extends Migration
             $table->integer('precio')->nullable();
             $table->integer('num_hab')->nullable();
             $table->string('muebles')->nullable();
-            $table->string('descripcion', 3000)->nullable();
+            $table->string('descripcion', 5000)->nullable();
             $table->integer('telefono')->nullable();
             $table->string('propietario')->nullable();
             $table->timestamps();
