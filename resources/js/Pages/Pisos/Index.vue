@@ -77,9 +77,15 @@
             </Link>
           </td>
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-green-500" :href="`/pisos/${piso.id}/edit`" tabindex="-1">
-              {{ piso.descripcion }}
-            </Link>
+            <div class="flex items-center px-6 py-4 focus:text-green-500">
+              <div v-if="piso.descripcion.length > 100">
+                {{ piso.descripcion.slice(0, 50) + '...' }}
+                <a class="cursor-pointer text-green-500 underline" @click="mostrarDescripcionCompleta(piso)">Ver más</a>
+              </div>
+              <div v-else>
+                {{ piso.descripcion }}
+              </div>
+            </div>
           </td>
         </tr>
         <tr v-if="pisos.data.length === 0">
@@ -100,6 +106,7 @@ import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import SearchFilter from '@/Shared/SearchFilter'
 import Pagination from '@/Shared/Pagination'
+import Swal from 'sweetalert2'
 
 export default {
   components: {
@@ -133,6 +140,14 @@ export default {
     reset() {
       this.form = mapValues(this.form, () => null)
     },
+    mostrarDescripcionCompleta(piso) {
+      Swal.fire({
+        title: 'Descripción completa',
+        text: piso.descripcion,
+        icon: 'info',
+        confirmButtonText: 'Cerrar'
+      });
+    }
   },
 }
 </script>

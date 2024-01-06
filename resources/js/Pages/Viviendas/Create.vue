@@ -25,6 +25,7 @@
             <option value="SADO">Adosado</option>
             <option value="LOFT">Loft</option>
             <option value="FINC">Finca</option>
+            <option value="PISO">Piso</option>
           </select-input>
           <text-input v-model="form.propietario" :error="form.errors.propietario" class="pb-8 pr-6 w-full lg:w-1/3" label="Propietario" />
           <text-input v-model="form.telefono" :error="form.errors.telefono" class="pb-8 pr-6 w-full lg:w-1/3" type="number" label="Teléfono" />
