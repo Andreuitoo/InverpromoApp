@@ -88,7 +88,13 @@
           </td>
           <td class="border-t">
             <div class="flex items-center px-6 py-4 focus:text-green-500">
-              {{ demanda.descripcion ? demanda.descripcion : 'No tiene descripción' }}
+              <div v-if="demanda.descripcion.length > 100">
+                {{ demanda.descripcion.slice(0, 50) + '...' }}
+                <a class="cursor-pointer text-green-500 underline" @click="mostrarDescripcionCompleta(demanda)">Ver más</a>
+              </div>
+              <div v-else>
+                {{ demanda.descripcion }}
+              </div>
             </div>
           </td>
         </tr>
@@ -109,6 +115,7 @@ import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import SearchFilter from '@/Shared/SearchFilter'
 import Dropdown2 from '@/Shared/Dropdown2'
+import Swal from 'sweetalert2'
 
 export default {
   components: {
@@ -142,6 +149,14 @@ export default {
     reset() {
       this.form = mapValues(this.form, () => null)
     },
+    mostrarDescripcionCompleta(demanda) {
+      Swal.fire({
+        title: 'Descripción completa',
+        text: demanda.descripcion,
+        icon: 'info',
+        confirmButtonText: 'Cerrar'
+      });
+    }
   },
 }
 </script>
