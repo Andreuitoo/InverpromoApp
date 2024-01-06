@@ -175,7 +175,7 @@ class ViviendasController extends Controller
                 'zona_comunitaria' => ['nullable', 'max:20'],
                 'antiguedad' => ['nullable', 'max:20'],
                 'direccion' => ['nullable', 'max:200'],
-                'descripcion' => ['nullable', 'max:1000'],
+                'descripcion' => ['nullable', 'max:3000'],
             ])
         );
 
