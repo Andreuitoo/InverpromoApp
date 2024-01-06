@@ -58,7 +58,7 @@ class DemandasController extends Controller
                 'num_hab_2' => ['nullable', 'max:2'],
                 'precio' => ['required', 'max:10'],
                 'precio_2' => ['nullable', 'max:10'],
-                'descripcion' => ['nullable', 'max:500'],
+                'descripcion' => ['nullable', 'max:1000'],
             ])
         );
 
@@ -102,7 +102,7 @@ class DemandasController extends Controller
                 'num_hab_2' => ['nullable', 'max:2'],
                 'precio' => ['required', 'max:10'],
                 'precio_2' => ['nullable', 'max:10'],
-                'descripcion' => ['nullable', 'max:500'],
+                'descripcion' => ['nullable', 'max:3000'],
             ])
         );
 

@@ -53,7 +53,7 @@ class PisosController extends Controller
                 'precio' => ['required', 'max:10'],
                 'num_hab' => ['required', 'max:2'],
                 'muebles' => ['required', 'max:4'],
-                'descripcion' => ['required', 'max:1000'],
+                'descripcion' => ['required', 'max:3000'],
                 'telefono' => ['required', 'max:9'],
                 'propietario' => ['required', 'max:35'],
             ])
@@ -105,7 +105,7 @@ class PisosController extends Controller
                 'precio' => ['required', 'max:10'],
                 'num_hab' => ['required', 'max:2'],
                 'muebles' => ['required', 'max:4'],
-                'descripcion' => ['required', 'max:1000'],
+                'descripcion' => ['required', 'max:3000'],
                 'telefono' => ['required', 'max:9'],
                 'propietario' => ['required', 'max:35'],
             ])
