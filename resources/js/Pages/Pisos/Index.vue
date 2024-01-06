@@ -78,7 +78,7 @@
           </td>
           <td class="border-t">
             <div class="flex items-center px-6 py-4 focus:text-green-500">
-              <div v-if="piso.descripcion.length > 100">
+              <div v-if="piso.descripcion && piso.descripcion.length > 100">
                 {{ piso.descripcion.slice(0, 50) + '...' }}
                 <a class="cursor-pointer text-green-500 underline" @click="mostrarDescripcionCompleta(piso)">Ver más</a>
               </div>
