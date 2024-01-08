@@ -38,6 +38,7 @@ class Demanda extends Model
             $query->where(function ($query) use ($search) {
                 $query->where('ref', 'like', '%'.$search.'%')
                     ->orWhere('nombre', 'like', '%'.$search.'%')
+                    ->orWhere('telefono', 'like', '%'.$search.'%')
                     ->orWhere('fecha', 'like', '%'.$search.'%');
             });
         });

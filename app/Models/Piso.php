@@ -43,6 +43,7 @@ class Piso extends Model
                     ->orWhere('tipo_piso', 'like', '%'.$search.'%')
                     ->orWhere('fecha', 'like', '%'.$search.'%')
                     ->orWhere('precio', 'like', '%'.$search.'%')
+                    ->orWhere('telefono', 'like', '%'.$search.'%')
                     ->orWhere('zona', 'like', '%'.$search.'%');
             });
         });
