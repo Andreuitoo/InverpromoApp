@@ -89,9 +89,9 @@
           </td>
           <td class="border-t">
             <div class="flex items-center px-6 py-4 focus:text-green-500">
-              <div v-if="cliente.descripcion && cliente.descripcion.length > 100">
-                {{ cliente.descripcion.slice(0, 50) + '...' }}
-                <a class="cursor-pointer text-green-500 underline" @click="mostrarDescripcionCompleta(cliente)">Ver más</a>
+              <div v-if="cliente.descripcion && cliente.descripcion.length > 30">
+                {{ cliente.descripcion.slice(0, 20) + '...' }}
+                <a class="cursor-pointer text-green-500 hover:underline" @click="mostrarDescripcionCompleta(cliente)">Ver más</a>
               </div>
               <div v-else>
                 {{ cliente.descripcion }}

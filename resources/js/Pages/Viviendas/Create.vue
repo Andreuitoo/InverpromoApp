@@ -73,8 +73,8 @@
           <text-input v-model="form.zona_comunitaria" :error="form.errors.zona_comunitaria" class="pb-8 pr-6 w-full lg:w-1/3" label="Zona comunitaria" />
           <text-input v-model="form.antiguedad" :error="form.errors.antiguedad" class="pb-8 pr-6 w-full lg:w-1/3" label="Antiguedad" />
           <text-input v-model="form.direccion" :error="form.errors.direccion" class="pb-8 pr-6 w-full lg:w-1/3" label="Dirección" />
-          <text-area-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/3" label="Descripción" />
           <FileInput2 v-model="form.fotos" :error="form.errors.fotos" class="pb-8 pr-6 w-full lg:w-1/3" label="Fotos" multiple />
+          <text-area-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/3" label="Descripción" />
         </div>
         <div class="flex items-center justify-end px-8 py-4 bg-gray-50 border-t border-gray-100">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Añadir vivienda</loading-button>

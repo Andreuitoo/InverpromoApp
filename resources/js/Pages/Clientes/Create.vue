@@ -22,7 +22,7 @@
           <text-area-input v-model="form.descripcion" :error="form.errors.descripcion" class="pb-8 pr-6 w-full lg:w-1/2" label="Descripción" />
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Añadir demanda</loading-button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Añadir cliente</loading-button>
         </div>
       </form>
     </div>
