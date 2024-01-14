@@ -84,7 +84,7 @@
           </td>
           <td class="border-t">
             <div class="flex items-center px-6 py-4 focus:text-green-500">
-              Desde {{ cliente.precio }} hasta {{ cliente.precio_2 }}
+              Desde {{ cliente.precio }} hasta {{ cliente.precio_2 ? cliente.precio_2 : 'No tiene precio maximo' }}
             </div>
           </td>
           <td class="border-t">
@@ -135,6 +135,7 @@ export default {
     return {
       form: {
         search: this.filters.search,
+        precio: this.filters.precio,
       },
     }
   },

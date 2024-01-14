@@ -42,5 +42,9 @@ class Cliente extends Model
                     ->orWhere('fecha', 'like', '%'.$search.'%');
             });
         });
+
+        $query->when(isset($filters['precio'], $filters['precio_2']), function ($query) use ($filters) {
+            $query->whereBetween('precio', [$filters['precio'], $filters['precio_2']]);
+        });
     }
 }
