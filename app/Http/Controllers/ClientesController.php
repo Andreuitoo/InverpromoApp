@@ -13,10 +13,10 @@ class ClientesController extends Controller
     public function index()
     {
         return Inertia::render('Clientes/Index', [
-            'filters' => Request::all('search'),
+            'filters' => Request::all(['search', 'precio', 'precio_2']),
             'clientes' => Cliente::query()
                 ->orderBy('ref', 'desc')
-                ->filter(Request::only('search'))
+                ->filter(Request::only(['search', 'precio', 'precio_2']))
                 ->paginate(10)
                 ->withQueryString()
                 ->through(fn ($cliente) => [

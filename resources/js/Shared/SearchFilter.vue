@@ -1,9 +1,7 @@
 <template>
   <div class="flex items-center">
     <div class="flex bg-white rounded shadow">
-      <dropdown :auto-close="false"
-        class="focus:z-10 px-4 hover:bg-gray-100 border-r focus:border-white rounded-l focus:ring md:px-6"
-        placement="bottom-start">
+      <dropdown :auto-close="false" class="focus:z-10 px-4 hover:bg-gray-100 border-r focus:border-white rounded-l focus:ring md:px-6" placement="bottom-start">
         <template #default>
           <div class="flex items-baseline">
             <span class="hidden text-gray-700 md:inline">Filtros</span>
@@ -14,18 +12,8 @@
           </div>
         </template>
         <template #dropdown>
-          <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
-            <div class="flex flex-wrap -mb-8 -mr-6 p-8">
-                <TextInput v-model="precioMin" type="number" placeholder="Precio mínimo" class="pb-8 pr-6 w-full lg:w-1/2"/>
-                <TextInput v-model="precioMax" type="number" placeholder="Precio máximo" class="pb-8 pr-6 w-full lg:w-1/2"/>
-                <TextInput v-model="precioMax" type="number" placeholder="Precio máximo" class="pb-8 pr-6 w-full lg:w-1/2"/>
-                <TextInput v-model="precioMax" type="number" placeholder="Precio máximo" class="pb-8 pr-6 w-full lg:w-1/2"/>
-                <TextInput v-model="precioMax" type="number" placeholder="Precio máximo" class="pb-8 pr-6 w-full lg:w-1/2"/>
-                <TextInput v-model="precioMax" type="number" placeholder="Precio máximo" class="pb-8 pr-6 w-full lg:w-1/2"/>
-            </div>
-            <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100" type="button">
-              <LoadingButton class="btn-indigo ml-auto" @click="aplicarFiltros">Aplicar filtros</LoadingButton>
-            </div>
+          <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden" :style="{ maxWidth: `${maxWidth}px` }">
+            <slot />
           </div>
         </template>
       </dropdown>
@@ -39,14 +27,10 @@
 
 <script>
 import Dropdown from '@/Shared/Dropdown'
-import TextInput from '@/Shared/TextInput'
-import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
   components: {
     Dropdown,
-    TextInput,
-    LoadingButton
   },
   props: {
     modelValue: String,

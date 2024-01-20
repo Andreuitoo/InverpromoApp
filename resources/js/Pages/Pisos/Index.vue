@@ -3,7 +3,19 @@
     <Head title="Pisos" />
     <h1 class="mb-8 text-3xl font-bold">Pisos</h1>
     <div class="flex items-center justify-between mb-6">
-      <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset" />
+      <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
+        <div class="flex flex-wrap -mb-8 -mr-6 p-8">
+          <TextInput v-model="form.precio" type="number" placeholder="Precio mínimo" class="pb-8 pr-6 w-full lg:w-1/2"/>
+          <TextInput v-model="form.precio_2" type="number" placeholder="Precio máximo" class="pb-8 pr-6 w-full lg:w-1/2"/>
+          <TextInput v-model="form.precio_2" type="number" placeholder="Precio máximo" class="pb-8 pr-6 w-full lg:w-1/2"/>
+          <TextInput v-model="form.precio_2" type="number" placeholder="Precio máximo" class="pb-8 pr-6 w-full lg:w-1/2"/>
+          <TextInput v-model="form.precio_2" type="number" placeholder="Precio máximo" class="pb-8 pr-6 w-full lg:w-1/2"/>
+          <TextInput v-model="form.precio_2" type="number" placeholder="Precio máximo" class="pb-8 pr-6 w-full lg:w-1/2"/>
+        </div>
+        <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100" type="button">
+          <LoadingButton class="btn-indigo ml-auto" @click="aplicarFiltros">Aplicar filtros</LoadingButton>
+        </div>
+      </search-filter>
       <Link class="btn-indigo" href="/pisos/create">
         <span>Añadir</span>
         <span class="hidden md:inline">&nbsp;piso</span>
@@ -107,6 +119,7 @@ import mapValues from 'lodash/mapValues'
 import SearchFilter from '@/Shared/SearchFilter'
 import Pagination from '@/Shared/Pagination'
 import Swal from 'sweetalert2'
+import TextInput from '@/Shared/TextInput'
 
 export default {
   components: {
@@ -115,6 +128,7 @@ export default {
     Link,
     SearchFilter,
     Pagination,
+    TextInput,
   },
   layout: Layout,
   props: {

@@ -5,7 +5,10 @@
     <h1 class="mb-8 text-3xl font-bold">Clientes</h1>
     <div class="flex items-center justify-between mb-6">
       <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset" >
-        
+        <div class="flex flex-wrap -mb-8 -mr-6 p-8">
+            <TextInput v-model="form.precio" type="number" placeholder="Precio desde" class="pb-8 pr-6 w-full lg:w-1/2"/>
+            <TextInput v-model="form.precio_2" type="number" placeholder="Precio hasta" class="pb-8 pr-6 w-full lg:w-1/2"/>
+        </div>
       </search-filter>
       <Link class="btn-indigo" href="/clientes/create">
       <span>Añadir</span>
@@ -119,6 +122,7 @@ import mapValues from 'lodash/mapValues'
 import SearchFilter from '@/Shared/SearchFilter'
 import Dropdown2 from '@/Shared/Dropdown2'
 import Swal from 'sweetalert2'
+import TextInput from '@/Shared/TextInput'
 
 export default {
   components: {
@@ -127,6 +131,7 @@ export default {
     Link,
     SearchFilter,
     Dropdown2,
+    TextInput,
   },
   layout: Layout,
   props: {
@@ -138,6 +143,7 @@ export default {
       form: {
         search: this.filters.search,
         precio: this.filters.precio,
+        precio_2: this.filters.precio_2,
       },
     }
   },
